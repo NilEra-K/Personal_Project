@@ -67,11 +67,33 @@ void displayMusic() {
 	mciSendString(_T("play 黑夜问白天.mp3 repeat"), 0, 0, 0);
 }
 
+void displayVideo() {
+	// 视频播放原理, 实现多帧图片依次播放
+
+	// 定义文件名
+	char fileName[128];
+	initgraph(480, 360);
+	while (1) {
+		for (int i = 1; i <= 2023; i++) {
+			// 注意: sprintf(fileName, filePathTemplate, value); 函数当前已经被定义为不安全的函数
+			// 使用时可以使用 sprintf_s(fileName, filePathTemplate, value); 进行代替
+			// 注意: loadimage(0, imagePath); 函数需要传入固定的 image路径, 在 VS 中需要使用多字符字符集来实现本地化
+			// 另一个解决方案为编写函数进行转化, 在此不做实现
+			sprintf_s(fileName, "C:/Users/NilEra/Documents/Data/Code/CProject1/CGuiProject1/Viedo2Image/%d.jpg", i);
+			loadimage(0, _T(fileName));
+			Sleep(25);
+		}
+	}
+	loadimage(0, _T("C:/Users/NilEra/Documents/Data/Code/CProject1/CGuiProject1/Viedo2Image/1.jpg"));
+	system("pause");
+	closegraph();
+}
+
 int main() {
 	// learnDrawCircle();
 	// learnMoreGraph();
 	// displayMusic();
-
+	// displayVideo();
 	initgraph(899, 500);
 	loadimage(0, _T("hackerBackground.jpg"));
 
